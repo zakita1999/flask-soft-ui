@@ -56,15 +56,7 @@ At this point, the app runs at `http://127.0.0.1:5000/`.
 ### 👉 Create Database Mysql posdb
 
 import the database 'posdb.sql'
-    database name : 'posdb'
-    username : 'root'
-    password : ''
-    host : 'localhost'
-
-- Start the app via `flask run`
-- Access the `registration` page and create a new user:
-  - `http://127.0.0.1:5000/register`
-- Access the `sign in` page and authenticate
-  - `http://127.0.0.1:5000/login`
-
-<br />
+    <br> database name : 'posdb'
+    <br> username : 'root'
+    <br> password : ''
+    <br> host : 'localhost'
