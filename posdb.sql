@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 08 mars 2023 à 22:34
+-- Généré le : mer. 08 mars 2023 à 23:02
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.24
 
@@ -38,9 +38,8 @@ CREATE TABLE `discounts` (
 --
 
 INSERT INTO `discounts` (`id`, `name`, `percentage`) VALUES
-(1, 'zaki', '47.00'),
-(3, 'mp', '70.00'),
-(4, 'zzz', '58.00');
+(1, 'save47', '47.00'),
+(3, 'save70', '70.00');
 
 -- --------------------------------------------------------
 
@@ -63,8 +62,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `price`, `tax`, `image`) VALUES
 (1, 'samsung', '200.00', '10.00', 'sm.jpg'),
 (8, 'iphone 14 pro', '1000.00', '40.00', 'iphone-14-pro-max.png'),
-(10, 'Huawei P20 Pro', '900.00', '20.00', 'huawei-p20-pro.jpg'),
-(12, 'iphone 14 pro max', '7000.00', '100.00', 'CV_FORMATEUR.jpg');
+(10, 'Huawei P20 Pro', '900.00', '20.00', 'huawei-p20-pro.jpg');
 
 --
 -- Index pour les tables déchargées
