@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">POS System</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/product">Product Management</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/checkout">Checkout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/discount">Discount</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      ></script>
+    
+    <script>
+      const selectedProducts = [];
+    
+      const productGrid = document.querySelector('.product-grid');
+      const selectedProductsList = document.getElementById('selected-products-list');
+    
+      price_total = 0;
+      productGrid.addEventListener('click', event => {
+        if (event.target.closest('.product-item')) {
+          const product = event.target.closest('.product-item');
+          const productName = product.querySelector('h2').textContent;
+          const productPrice = product.querySelector('p span').textContent;
+          const selectedProduct = { name: productName, price: productPrice };
+          selectedProducts.push(selectedProduct);
+
+          price_total += parseFloat(selectedProduct.price);
+          document.getElementById("cart-total").innerHTML = `$${price_total.toFixed(2)}`;
+    
+          const listItem = document.createElement('li');
+          const itemText = document.createTextNode(`${productName} - ${productPrice}`);
+          listItem.appendChild(itemText);
+          selectedProductsList.appendChild(listItem);
+        }
+      });
+
+      const discountCodeElem = document.querySelector("#discount-code");
+      const applyDiscountBtn = document.querySelector("#apply-discount-btn");
+      const discountMsgElem = document.querySelector("#discount-msg");
+      
+
+      check = false
+      percentage = 100;
+      function checkDiscount(name, discounts){
+        discounts.forEach(element => {
+          if(element.name == name){
+            // console.log(element.percentage)
+            check = true;
+            percentage = element.percentage
+          }
+        });
+      }
+      
+      function applyDiscount() {
+        const discountCode = discountCodeElem.value;
+        checkDiscount(discountCode, discounts)
+        // console.log(percentage)
+        if(discountCode ===""){
+          alert("enter the discount code")
+        }
+        else if(!selectedProductsList.hasChildNodes()){
+          alert("you cant apply discount without any product in the cart, pleas add products in the cart")
+        }
+        else if ( check ) {
+          const discountPrice = price_total * (percentage / 100);
+          const finalPrice = price_total - discountPrice;
+          // totalElem.innerHTML = `$${finalPrice}`;
+          document.getElementById("cart-after-discount").innerHTML = `$${finalPrice.toFixed(2)}`;
+
+          document.getElementById("ds").classList.remove("d-none")
+          document.getElementById("ds").classList.add("d-flex")
+
+          discountMsgElem.innerHTML = `Discount Applied: ${100* (percentage / 100) }% off`;
+          discountCodeElem.value="";
+        } else {
+          discountMsgElem.innerHTML = "Invalid Discount Code";
+          document.getElementById("cart-total").innerHTML = `$${price_total.toFixed(2)}`;
+          document.getElementById("cart-after-discount").innerHTML = `$0`;
+          document.getElementById("ds").classList.remove("d-flex")
+          document.getElementById("ds").classList.add("d-none")
+        }
+      }
+
+    </script>
+
+  </body>
+</html>

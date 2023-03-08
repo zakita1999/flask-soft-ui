@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Checkout</h1>
+  <div class="row mt-4">
+    <div class="col-md-9">
+        <div class="row product-grid">
+            {% for product in products %}
+            <div class="col-md-4">
+                <div class="product-item card mb-4 shadow-sm">
+                    <img src="/static/images/{{ product.image }}" alt="{{ product.name }}">
+                    <h2>{{ product.name }}</h2>
+                    <p>$<span>{{ product.price }}</span></p>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+      <div id="cart-list">
+        <h4>Cart</h4>
+        <hr>
+        <div class="selected-products">
+            <ul id="selected-products-list"></ul>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        <div class="justify-content-between d-none" id="ds">
+            <span>Total after discount:</span>
+            <span id="cart-after-discount" class="">$0.00</span>
+        </div>
+        <div class="input-group my-3">
+          <input type="text" class="form-control" placeholder="Discount code" id="discount-code">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="apply-discount-btn" onclick="applyDiscount()">Apply</button>
+          </div>
+        </div>
+        <div id="discount-msg"></div>
+        <hr>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Checkout</a>
+        <!-- <hr> -->
+        <!-- <button type="button" class="btn btn-lg btn-block btn-primary" onclick="checkout()">Checkout</button> -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const discounts = {{ discounts|tojson }};
+  </script>
+{% endblock %}

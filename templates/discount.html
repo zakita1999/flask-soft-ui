@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-3">Discount</h1>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Percentage(%)</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for discount in discounts %}
+          <tr>
+              <td>{{ discount.id }}</td>
+              <td>{{ discount.name }}</td>
+              <td>{{ discount.percentage }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+{% endblock %}
