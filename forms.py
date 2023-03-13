@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DecimalField, FileField, IntegerField
 from wtforms.validators import DataRequired, InputRequired, NumberRange, Regexp
-from flask import session
 
 class AddDiscountForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])

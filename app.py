@@ -5,15 +5,23 @@ from flask_wtf.csrf import CSRFProtect
 from PIL import Image
 from io import BytesIO
 from werkzeug.utils import secure_filename
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'irk7IFD9ZP4keef78'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/posdb'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 csrf = CSRFProtect()
 csrf.init_app(app)
-
 db.init_app(app)
+
+migrate = Migrate(app, db)
+
+# app = Flask(__name__)
+# app.config['SECRET_KEY'] = 'irk7IFD9ZP4keef78'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/posdb'
+# csrf = CSRFProtect()
+# csrf.init_app(app)
+# db.init_app(app)
 
 @app.route("/")
 def index():

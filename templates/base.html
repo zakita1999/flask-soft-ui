@@ -48,6 +48,11 @@
     
       price_total = 0;
       productGrid.addEventListener('click', event => {
+        
+        document.getElementById("product-g").classList.remove("col-md-12");
+        document.getElementById("product-g").classList.add("col-md-9");
+        document.querySelector("#cart-list").classList.remove("hidden");
+
         if (event.target.closest('.product-item')) {
           const product = event.target.closest('.product-item');
           const productName = product.querySelector('h2').textContent;

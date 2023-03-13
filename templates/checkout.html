@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Checkout</h1>
   <div class="row mt-4">
-    <div class="col-md-9">
+    <div class="col-md-12" id="product-g">
         <div class="row product-grid">
             {% for product in products %}
             <div class="col-md-4">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-md-3">
-      <div id="cart-list">
+      <div id="cart-list" class="hidden">
         <h4>Cart</h4>
         <hr>
         <div class="selected-products">
